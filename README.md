@@ -35,6 +35,22 @@ npm run dev
 ```
 Open `http://localhost:5173`.
 
+## Single-click launcher (Windows)
+From the project root, just double-click `start_app.bat` or run:
+```powershell
+.\start_app.bat
+```
+What it does:
+- Creates backend virtual environment if missing.
+- Installs backend/frontend dependencies (first run).
+- Opens two PowerShell windows (backend + frontend).
+- Opens the dashboard in your browser.
+
+Faster subsequent launches (skip installs):
+```powershell
+.\start_app.bat --skip-install
+```
+
 ## API endpoints
 - `POST /sync` - fetches/refreshes NSE/BSE-backed universe data.
 - `GET /rankings` - top 10 per cap segment + last sync.
