@@ -66,3 +66,11 @@ Faster subsequent launches (skip installs):
 ## Notes
 - This is designed for local research use and depends on upstream market-data availability.
 - Universe is currently seeded with representative NSE tickers and can be expanded easily in `backend/universe.py`.
+
+
+## Troubleshooting launcher on Windows
+- If you see PowerShell errors about `&&` or `cd /d`, update to the latest repository version; the launcher now uses PowerShell-safe commands (`Set-Location`) and no longer relies on CMD syntax.
+- Then run:
+```powershell
+.\start_app.bat --skip-install
+```

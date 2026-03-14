@@ -43,13 +43,13 @@ if (-not $SkipInstall) {
   Pop-Location
 }
 
-# Start backend in separate terminal
-$backendCommand = "cd /d `"$backendDir`" && .venv\Scripts\Activate.ps1; uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
-Start-Process powershell -ArgumentList '-NoExit', '-ExecutionPolicy', 'Bypass', '-Command', $backendCommand
+# Start backend in separate PowerShell window (PowerShell-safe syntax)
+$backendCommand = "Set-Location -Path '$backendDir'; & '.venv\\Scripts\\python.exe' -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+Start-Process powershell.exe -ArgumentList '-NoExit', '-ExecutionPolicy', 'Bypass', '-Command', $backendCommand
 
-# Start frontend in separate terminal
-$frontendCommand = "cd /d `"$frontendDir`" && npm run dev"
-Start-Process powershell -ArgumentList '-NoExit', '-ExecutionPolicy', 'Bypass', '-Command', $frontendCommand
+# Start frontend in separate PowerShell window
+$frontendCommand = "Set-Location -Path '$frontendDir'; npm run dev"
+Start-Process powershell.exe -ArgumentList '-NoExit', '-ExecutionPolicy', 'Bypass', '-Command', $frontendCommand
 
 Start-Sleep -Seconds 2
 Start-Process 'http://localhost:5173'
