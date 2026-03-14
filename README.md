@@ -5,10 +5,13 @@ React + FastAPI app to scan Indian stocks (NSE/BSE universe), normalize financia
 ## What it includes
 - India-only universe split into large/mid/small cap buckets.
 - Manual **Sync** button to refresh prices, ratios, growth metrics, news, and metadata from `yfinance`.
+- Strict eligibility filter: AlphaScore is computed only for stocks that have all crucial financial datapoints available (no critical missing values).
 - Transparent factor scoring and editable weights:
   - valuation (PE), leverage (D/E), profitability (ROE/ROA/margins), liquidity (current/quick ratio), cash flow, growth, ownership, qualitative news signal.
 - Top-10 tables for each segment based on latest synced data.
+- Professional dark-themed dashboard with expandable/collapsible stock panels, latest price visibility, and factor-level breakdown.
 - Search + stock detail evaluation using the exact same AlphaScore model.
+- Live search button that evaluates any NSE/BSE ticker in real time and computes AlphaScore immediately if complete data is available.
 - Wishlist with add/update/remove and persistent storage (`backend/data/wishlist.json`).
 - Last synced timestamp shown in dashboard and stock detail pages.
 
@@ -56,6 +59,7 @@ Faster subsequent launches (skip installs):
 - `GET /rankings` - top 10 per cap segment + last sync.
 - `POST /recalculate` - recalculates AlphaScore using custom weights.
 - `GET /search?q=` - autocomplete/lookup across India universe.
+- `GET /evaluate-live?query=` - real-time stock pull (NSE/BSE symbol match) and AlphaScore calculation.
 - `GET /stock/{ticker}` - detailed scoring + recent news summaries.
 - `GET|POST|DELETE /wishlist` - persistent wishlist operations.
 
